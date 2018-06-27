@@ -1,0 +1,40 @@
+#!/bin/bash
+
+alias sl="ls"
+function ls {
+  /bin/ls -lhGpA "$@"
+}
+alias irb="pry"
+alias be="bundle exec"
+alias c="clear"
+
+## General
+
+## Ruby
+alias rreset='be rails db:drop; be rails db:create; be rails db:migrate; be rails db:seed'
+
+## Git
+alias gaa='git add .'
+alias gcm='git commit -m'
+alias gcount='git rev-list --all --count'
+alias gitgraph='git log --graph --decorate --oneline'
+
+## Rails
+alias rmodel='rails g model'
+alias rcont='rails g controller'
+alias rtest='be rails db:migrate db:test:load'
+alias rmig='be rails db:migrate'
+
+## Python
+
+
+# make `g` behave like `git status` with no args, or `git` with args
+g () {
+  if [ $# -eq 0 ]
+  then
+    git status
+  else
+    git "$@"
+  fi
+}
+__git_complete g _git

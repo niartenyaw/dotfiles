@@ -1,0 +1,29 @@
+[alias]
+	a = add
+	aa = add --all :/
+	alias = config --get-regexp ^alias\\.
+	b = branch
+	ci = commit
+	co = checkout
+	d = diff --ignore-space-change
+	l = log --pretty=format:\"%C(green)%h%C(reset) %C(blue)%ad%C(reset) %s%C(yellow)%d%C(reset) %C(blue)[%an]%C(reset)\" --graph --date=short
+	s = status
+	r = remote
+	g = grep --break --heading --line-number
+[color]
+	ui = true
+[core]
+	excludesfile = ~/.gitignore
+	ignorecase = false
+[push]
+	default = simple
+[user]
+	name = niartenyaw
+	email = amwayne90@gmail.com
+[credential]
+	helper = !aws codecommit credential-helper $@
+	UseHttpPath = true
+[grep]
+	lineNumber = true
+[commit]
+	verbose = true

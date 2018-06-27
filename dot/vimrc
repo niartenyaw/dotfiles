@@ -1,0 +1,109 @@
+set nocompatible
+" Initialization of pathogen
+call pathogen#infect()
+call pathogen#helptags()
+
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" =================
+" NERDTree
+" =================
+
+" Start NERDTree if no file specified when opening vim
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" -----------
+" keymappings
+" ----------- 
+" Start NERDTree on <C-n>
+map <C-n> :NERDTreeToggle<CR>
+" 'w' to open and close nodes
+let NERDTreeMapActivateNode='d'
+" 'e' to open file and stay in tree
+let NERDTreeMapPreview='c'
+let NERDTreeMapPreviewSplit='f'
+" 'v' to open file vertically and stay in tree
+let NERDTreeMapPreviewVSplit='v'
+" Show dotfiles
+let NERDTreeShowHidden=1
+
+" CtrlP config
+" a - directory of the current file, unless it is sub of cwd
+let g:ctrlp_working_path_mode='a'
+set wildignore+=*/node_modules/*,*.swp
+
+" Set tabs to spaces and size 2
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+
+" =============
+" Appearance
+" =============
+
+set t_Co=256
+
+syntax enable
+
+colorscheme solarized 
+
+let g:airline_theme='luna'
+" let g:airline_solarized_bg='dark'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#hunks#enabled=0
+let g:airline#extensions#branch#empty_message = 'woof! 🐶'
+
+" Ale linter always have column
+" let g:ale_sign_column_always = 1
+" Only lint on save
+" let g:ale_lint_on_text_changed = 'never'
+" Linter info in statusline
+" let g:airline#extensions#ale#enabled = 1
+" Error msg
+" let g:ale_echo_msg_error_str = 'E'
+" let g:ale_echo_msg_warning_str = 'W'
+" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+
+" Gitgutter always have signs column
+let g:gitgutter_enabled = 0
+" let g:gitgutter_highlight_lines = 1
+
+" Indent Guides config
+" set background=dark " Needs to be after colorscheme for indent guides
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_guide_size=2
+" Custom colors
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=18
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=19
+
+" Set max char column
+set colorcolumn=74
+hi ColorColumn ctermbg=235
+
+" Set line number to be relative to current line
+set number
+if exists("&relativenumber")
+  set relativenumber
+  au BufReadPost * set relativenumber
+endif
+
+" Markdown highlighting
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+" Set cursor colors
+set cursorcolumn
+hi CursorColumn ctermbg=24
+set cursorline
+hi CursorLine ctermbg=24
+
+" No error bells pls
+set noerrorbells visualbell t_vb=
+
+filetype plugin indent on
+runtime! config/**/*.vim
+

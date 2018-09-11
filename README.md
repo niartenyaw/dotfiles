@@ -1,42 +1,21 @@
 # Packages
 
-## vim
-
-+ ale
-+ colorschemes
-+ ctrlp.vim
-+ nerdtree
-+ node
-+ vim-gitgutter
-+ vim-indent-guides
-+ vim-javascript
-+ vim-javascript-syntax
-+ vim-jsbeautify
-+ vim-wakatime
-+ vim-airline
-+ vim-airline-themes
-+ vim-fugitive
-
 ## brew
 
 + awscli
-+ imgcat
-+ imagemagick
-+ node
-+ go
-+ heroku
-+ postgresql
 + diff-so-fancy
 + git
++ go
++ heroku
++ imagemagick
++ imgcat
++ nvm (don't forget to install node too)
++ postgresql
++ pyenv
 + rbenv
 + the_silver_searcher
 + tmate
 + tree
-+ thefuck
-
-## other
-
-+ npm
 
 ## VSCode
 
@@ -60,3 +39,23 @@
 + Git History
 + IntelliSense for CSS class names in HTML
 
+## vim
+
++ ale
++ colorschemes
++ ctrlp.vim
++ nerdtree
++ node
++ vim-gitgutter
++ vim-indent-guides
++ vim-javascript
++ vim-javascript-syntax
++ vim-jsbeautify
++ vim-wakatime
++ vim-airline
++ vim-airline-themes
++ vim-fugitive
+
+## other
+
++ npm

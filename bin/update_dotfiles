@@ -1,0 +1,19 @@
+#!/usr/bin/ruby
+
+require 'fileutils'
+
+dotfiles = Dir['dot/*']
+
+special_destinations = {
+  'vimrc' => "#{Dir.home}/.vim/"
+}
+
+typical_destination = "#{Dir.home}/"
+
+dotfiles.each do |file|
+  file_full_path = "#{Dir.pwd}/#{file}"
+  name = file.split('/').last
+  destination = special_destinations[name] || typical_destination
+
+  FileUtils.cp(file_full_path, "#{destination}.#{name}")
+end

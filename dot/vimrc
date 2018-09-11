@@ -48,9 +48,10 @@ set t_Co=256
 syntax enable
 
 colorscheme solarized 
+set background=dark " Needs to be after colorscheme for indent guides
 
 let g:airline_theme='luna'
-" let g:airline_solarized_bg='dark'
+let g:airline_solarized_bg='dark'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#hunks#enabled=0
@@ -73,7 +74,6 @@ let g:gitgutter_enabled = 0
 " let g:gitgutter_highlight_lines = 1
 
 " Indent Guides config
-" set background=dark " Needs to be after colorscheme for indent guides
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_guide_size=2
 " Custom colors

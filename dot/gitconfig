@@ -14,16 +14,16 @@
 	ui = true
 [core]
 	excludesfile = ~/.gitignore
-	ignorecase = false
+  ignorecase = false
+  logAllRefUpdates = true
 [push]
 	default = simple
 [user]
 	name = niartenyaw
 	email = amwayne90@gmail.com
-[credential]
-	helper = !aws codecommit credential-helper $@
-	UseHttpPath = true
 [grep]
 	lineNumber = true
 [commit]
 	verbose = true
+[rerere]
+	enabled = true

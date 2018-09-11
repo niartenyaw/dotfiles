@@ -1,5 +1,7 @@
 #!/bin/bash
 
+alias cd="HOME=~/mesosphere cd"
+
 alias sl="ls"
 function ls {
   /bin/ls -lhGpA "$@"

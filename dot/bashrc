@@ -7,15 +7,10 @@ source "$HOME/.git-prompt.sh"
 
 # look for commands in these places
 export PATH="/Applications/Postgres.app/Contents/Versions/9.6/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="$HOME/.bin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/aaronwayne/personal/rock-iq/google-cloud-sdk/path.bash.inc' ]; then source '/Users/aaronwayne/personal/rock-iq/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/aaronwayne/personal/rock-iq/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/aaronwayne/personal/rock-iq/google-cloud-sdk/completion.bash.inc'; fi
 
 # make vim the default text editor
 export EDITOR="vim"
@@ -23,19 +18,15 @@ export EDITOR="vim"
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 export TERM='xterm-256color'
 
-# make AA my default cd
-alias cd="HOME=~/app-academy cd"
-
 # shortened prompt that includes git branch info
 RED='\[\e[0;31m\]'
 WHITE='\[\e[1;37m\]'
 RESET='\[\e[0m\]'
-export PS1="$RED\w$WHITE\$(__git_ps1)$RED\n[🐶 ] \$$RESET "
+export PS1="$RED\w$WHITE\$(__git_ps1)$RED\n[🐶] \$$RESET "
 
 ### other ###
-export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:$PATH"
-export PATH="/Users/aaronwayne/miniconda3/bin:$PATH"
- #initialize rbenv
+
+#initialize rbenv
 eval "$(rbenv init -)"
 
 # Set history format
@@ -51,4 +42,8 @@ export NVM_DIR="$HOME/.nvm"
 # load any local configuration
 [[ -f "$HOME/.bashrc.local" ]] && source "$HOME/.bashrc.local"
 
-eval $(thefuck --alias)
+source <(maws completion bash)
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi

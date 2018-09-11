@@ -5,4 +5,6 @@ git_url="https://raw.githubusercontent.com/git/git/master/contrib/completion"
 curl "$git_url/git-prompt.sh" > "$HOME/.git-prompt.sh"
 curl "$git_url/git-completion.bash" > "$HOME/.git-completion.bash"
 
-./update_dotfiles
+./bin/update_dotfiles
+
+source ~/.bash_profile

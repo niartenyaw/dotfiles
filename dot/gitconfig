@@ -10,6 +10,7 @@
 	s = status
 	r = remote
 	g = grep --break --heading --line-number
+  cleanup = "!git branch --merged staging | grep  -v '\\*\\|master\\|develop\\|staging' | xargs -n 1 git branch -d"
 [color]
 	ui = true
 [core]

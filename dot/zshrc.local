@@ -1,0 +1,36 @@
+#! /bin/zsh
+
+# File: capybara.png
+# Use: partyemoji <name> <type> <size>
+# Example: partyemoji capybara png 100
+function partyemoji {
+  IFS="."; declare -a Array=($1);
+
+  convert "$1.$2" -resize $3x$3 1_party_emoji_partial.png
+  # convert "$1.$2" 1_party_emoji_partial.png
+  for i in {2..8}
+  do
+    convert "$(( i - 1 ))_party_emoji_partial.png" -set option:modulate:colorspace hsb -modulate 100,100,75 "${i}_party_emoji_partial.png"
+  done
+  convert *_party_emoji_partial.png "$1_party.gif"
+  rm *_party_emoji_partial.png
+}
+
+function colors {
+  # Credit: https://unix.stackexchange.com/a/269085
+  color(){
+      for c; do
+          printf '\e[48;5;%dm%03d' $c $c
+      done
+      printf '\e[0m \n'
+  }
+  color {0..255}
+}
+
+function trash {
+  mv $1 ~/.Trash
+}
+
+function delete_merged_branches {
+  git branch --merged | egrep -v "(^\*|master|develop|staging)" | xargs git branch -d
+}

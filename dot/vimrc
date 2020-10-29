@@ -1,109 +1,101 @@
-set nocompatible
-" Initialization of pathogen
-call pathogen#infect()
-call pathogen#helptags()
+set runtimepath+=~/.vim
 
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+source ~/.vim/vimrcs/basic.vim
+source ~/.vim/vimrcs/filetypes.vim
+source ~/.vim/vimrcs/plugins_config.vim
+source ~/.vim/vimrcs/extended.vim
 
-" =================
-" NERDTree
-" =================
+try
+source ~/.vim/my_configs.vim
+catch
+endtry
 
-" Start NERDTree if no file specified when opening vim
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+colorscheme solarized
 
-" -----------
-" keymappings
-" ----------- 
-" Start NERDTree on <C-n>
-map <C-n> :NERDTreeToggle<CR>
-" 'w' to open and close nodes
-let NERDTreeMapActivateNode='d'
-" 'e' to open file and stay in tree
-let NERDTreeMapPreview='c'
-let NERDTreeMapPreviewSplit='f'
-" 'v' to open file vertically and stay in tree
-let NERDTreeMapPreviewVSplit='v'
+""""""""""""""""""
+" Custom NERDTree config
+" Change nerdtree toggle
+map <C-n> :NERDTreeToggle<cr>
 " Show dotfiles
 let NERDTreeShowHidden=1
-
-" CtrlP config
-" a - directory of the current file, unless it is sub of cwd
-let g:ctrlp_working_path_mode='a'
+" Start NERDTree if no file specified when opening vim
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" open/close nodes with 'f'
+let NERDTreeMapActivateNode='f'
+" Custom NERDTree config
 set wildignore+=*/node_modules/*,*.swp
 
+""""""""""""""""""
+" Goyo Zenmode configuration
+function! s:goyo_enter()
+  set number
+  if exists("&relativenumber")
+    set relativenumber
+    au BufReadPost * set relativenumber
+  endif
+endfunction
+
+""""""""""""""""""
+" LimeLight configuration
+let g:limelight_paragraph_span = 1
+let g:limelight_priority = -1
+let g:limelight_default_coefficient = 0.7
+" autocmd! User GoyoEnter Limelight
+" autocmd! User GoyoLeave Limelight!
+
+"""""""""""""""""
+" Ale
+let g:ale_linters = {'ruby': ['standardrb']}
+let g:ale_fixers = {'ruby': ['standardrb']}
+let g:ale_fix_on_save = 1
+
+"""""""""""""""""
+" Go
+filetype plugin indent on
+
+""""""""""""""""""
+" Local Vim
+call lh#local_vimrc#munge('whitelist', $HOME.'/mesosphere')
+
+" fzf plugin
+set rtp+=/usr/local/opt/fzf
+nnoremap <leader>f :Files<cr>
+nnoremap <leader>a :Ag<cr>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>t :Tags <c-r><c-w><cr>
+nnoremap <leader>bt :BTags<cr>
+
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+
+""""""""""""""""""
+" General Custom config
 " Set tabs to spaces and size 2
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
 
-" =============
-" Appearance
-" =============
-
-set t_Co=256
-
-syntax enable
-
-colorscheme solarized 
-set background=dark " Needs to be after colorscheme for indent guides
-
-let g:airline_theme='luna'
-let g:airline_solarized_bg='dark'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#hunks#enabled=0
-let g:airline#extensions#branch#empty_message = 'woof! 🐶'
-
-" Ale linter always have column
-" let g:ale_sign_column_always = 1
-" Only lint on save
-" let g:ale_lint_on_text_changed = 'never'
-" Linter info in statusline
-" let g:airline#extensions#ale#enabled = 1
-" Error msg
-" let g:ale_echo_msg_error_str = 'E'
-" let g:ale_echo_msg_warning_str = 'W'
-" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-
-" Gitgutter always have signs column
-let g:gitgutter_enabled = 0
-" let g:gitgutter_highlight_lines = 1
-
-" Indent Guides config
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_guide_size=2
-" Custom colors
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=18
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=19
-
-" Set max char column
-set colorcolumn=74
-hi ColorColumn ctermbg=235
-
-" Set line number to be relative to current line
+" Set relative line number at cursor
 set number
 if exists("&relativenumber")
   set relativenumber
   au BufReadPost * set relativenumber
 endif
 
-" Markdown highlighting
-au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+" Jbuilder highlighting
+au BufNewFile,BufFilePre,BufRead *.json.jbuilder set ft=ruby
 
-" Set cursor colors
-set cursorcolumn
-hi CursorColumn ctermbg=24
-set cursorline
-hi CursorLine ctermbg=24
+" Set max char column
+set colorcolumn=80
+hi ColorColumn ctermbg=238
 
-" No error bells pls
-set noerrorbells visualbell t_vb=
+" Scroll the viewport faster
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
-filetype plugin indent on
-runtime! config/**/*.vim
+" Do not fold by default
+set nofoldenable
 
+let g:vim_markdown_frontmatter = 1

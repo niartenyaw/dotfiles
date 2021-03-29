@@ -54,10 +54,6 @@ let g:ale_fix_on_save = 1
 " Go
 filetype plugin indent on
 
-""""""""""""""""""
-" Local Vim
-call lh#local_vimrc#munge('whitelist', $HOME.'/mesosphere')
-
 " fzf plugin
 set rtp+=/usr/local/opt/fzf
 nnoremap <leader>f :Files<cr>

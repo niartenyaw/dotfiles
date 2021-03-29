@@ -1,11 +1,11 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 require 'fileutils'
 
 dotfiles = Dir['dot/*']
 
 special_destinations = {
-  'vimrc' => "#{Dir.home}/.vim/"
+#   'vimrc' => "#{Dir.home}/.vim/"
 }
 
 typical_destination = "#{Dir.home}/"

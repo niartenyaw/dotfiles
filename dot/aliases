@@ -31,3 +31,6 @@ alias rmig='be rails db:migrate'
 
 
 alias k='kubectl'
+
+# python
+alias pip='pip3'

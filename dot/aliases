@@ -1,14 +1,19 @@
-#!/bin/zsh
-
-alias cd="HOME=~/mesosphere cd"
-alias git=hub
+# alias git=hub
 alias securetether='sudo pppd user Default password 1 call securetether /dev/tty.Niartenyaw-SecureTether'
 
 alias sl="ls"
-function ls {
+function l {
   /bin/ls -lhGFA "$@"
 }
-alias irb="pry"
+function uuid {
+  ts-node -e "console.log(require('uuid').v1())" | tr -d '\n' | pbcopy
+}
+
+function now {
+  ts-node -e "console.log(new Date().toISOString())" | tr -d '\n' | pbcopy
+}
+
+
 alias be="bundle exec"
 alias g="git status"
 
@@ -34,3 +39,15 @@ alias k='kubectl'
 
 # python
 alias pip='pip3'
+alias python='python3'
+
+alias vim='nvim'
+
+function notify {
+  if [ -z "$@" ]
+  then
+    osascript -e "display notification '$@'"
+  else
+    osascript -e "display notification 'hello'"
+  fi
+}

@@ -1,0 +1,26 @@
+function l {
+  /bin/ls -lhGFA "$@"
+}
+
+function uuid {
+  ts-node -e "console.log(require('uuid').v1())" | tr -d '\n' | pbcopy
+}
+
+function now {
+  ts-node -T -e "console.log(new Date().toISOString())" | tr -d '\n' | pbcopy
+}
+
+alias g="git status"
+
+function notify {
+  if [ -z "$@" ]
+  then
+    osascript -e "display notification '$@'"
+  else
+    osascript -e "display notification 'hello'"
+  fi
+}
+
+alias c="clear"
+
+alias pn="pnpm"
